@@ -1,0 +1,20 @@
+{% if debugDump %}
+  <h4>DUMP</h4>
+  <ul>
+    {% for k, v in doc %}
+      <li>{$ k $} - {$ v $}</li>
+    {% endfor %}
+  </ul>
+  <h5>Bindings</h5>
+  <ul>
+    {% for v in doc.bindings %}
+      <li>{$ v.localName $} - {$ v.type $} - {$ v.attrName $} - {$ v.desc $}</li>
+    {% endfor %}
+  </ul>
+  <h5>Actions</h5>
+  <ul>
+    {% for v in doc.actions %}
+      <li>{$ v.name $} - {$ v.type $} on {$ v.on $}</li>
+    {% endfor %}
+  </ul>
+{% endif %}

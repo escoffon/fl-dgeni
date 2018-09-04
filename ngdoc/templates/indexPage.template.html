@@ -1,0 +1,100 @@
+<!doctype html>
+<html ng-app="fl.ngdoc">
+  <head>
+    <!-- <base href="/doc/out/dgeni/index.html"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$ title $}</title>
+
+    <!-- lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.js"
+	    integrity="sha256-qwbDmNVLiCqkqRBpF46q5bjYH11j5cd+K+Y6D3/ja28="
+	    crossorigin="anonymous"></script>
+    
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"
+	    integrity="sha256-FN0OJzazWIi06C3jaX3q4Q8ptDdecyBT/xEJm2+UYvo="
+	    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-touch.min.js"
+	    integrity="sha256-LjZWI9nsLrY4XaZEgpx+0atyG2l7rJ4BD1stAsLhiLU="
+	    crossorigin="anonymous"></script>
+    
+    <!-- UI-Router -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"
+	    integrity="sha256-7YZnaTAu5cFwx9WoBH/WSastyV87ECXZ8HEA19mfj/w="
+	    crossorigin="anonymous"></script>
+    
+    <!-- jQuery (for Bootstrap and fl-jquery) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	    crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap -->
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	    crossorigin="anonymous"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	  crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	    crossorigin="anonymous"></script>
+
+    <!-- Font Awesome (needed for Bootstrap 4) -->
+    <link rel="stylesheet"
+	  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	  crossorigin="anonymous">
+    
+    <!-- ui-boostrap (Angular) -->
+    <!-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"
+	    integrity="sha256-FJnwuQv+FZqA9vMnFwe3QhipH+NPiplOYEeGTS9y5cQ="
+	    crossorigin="anonymous"></script>
+    -->
+    <script src="ui-bootstrap-tpls-3.0.4.min.js"></script>
+    
+    <!-- Fl Angular stuff -->
+    <script src="fl-jquery.js"></script>
+    <script src="fl-directives.js"></script>
+
+    <!-- Fl CSS -->
+    <link rel="stylesheet" href="fl-ngdoc.css">
+
+    <!-- App and page data -->
+    <script src="app.module.js"></script>
+    <script src="api-data.js"></script>
+    <script src="content-data.js"></script>
+  </head>
+  <body class="fl-ngdoc-app">
+    <nav class="navbar navbar-dark navbar-expand-lg">
+      <span class="navbar-brand">{$ doc.name $}</span>
+      <button class="navbar-toggler" type="button"
+	      data-toggle="collapse" data-target="#navbarCollapsibleContent"
+	      aria-controls="navbarCollapsibleContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapsibleContent">
+	<ul class="navbar-nav mr-auto">
+	  {% for li in doc.navbar %}
+            <li class="nav-item"><a class="nav-link" ui-sref="{$ li.state $}">{$ li.label $}</a></li>
+	  {% endfor %}
+	</ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div ui-view></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{% raw %}
+  <div class="sidebar">
+    <uib-accordion close-others="false">
+      <div uib-accordion-group class="mb-1" 
+	   ng-repeat="item in items" ng-if="item.items.length > 0"
+	   heading="{{item.name}}" is-open="$first">
+	<div class="api-list">
+	  <ol class="list-unstyled">
+	    <li ng-repeat="page in item.items">
+	      <span class="folder-marker fas" 
+		    ng-if="page.docs.length > 0"
+		    ng-class="{ 'fa-folder': $ctrl.stateClosed(page.state.name), 'fa-folder-open': $ctrl.stateOpen(page.state.name) }"
+		    ng-click="$ctrl.flipState(page.state.name)"></span>
+	      <a ui-sref="{{page.state.name}}"
+		 xx-uib-tooltip="{{page.name}}">{{page.name}}</a>
+	      <ol class="list-unstyled"
+		  ng-show="$ctrl.stateOpen(page.state.name)">
+		<li ng-repeat="child in page.docs">
+		  <a ui-sref="{{child.state.name}}"
+		     xx-uib-tooltip="{{child.name}}">{{child.name}}</a>
+		</li>
+	      </ol>
+	    </li>
+	  </ol>
+	</div>
+      </div>
+    </uib-accordion>
+  </div>
+{% endraw %}

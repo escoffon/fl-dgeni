@@ -1,0 +1,84 @@
+{% macro typeList(types) -%}
+{% for typeName in types %}<a href="" class="badge {$ typeName | typeClass $}">{$ typeName | escape $}</a> {% endfor %}
+{%- endmacro -%}
+
+{%- macro paramTable(params) %}
+<table class="table table-compressed variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for param in params %}
+    <tr>
+      <td>
+        {$ param.name $}
+        {% if param.alias %}| {$ param.alias $}{% endif %}
+        {% if param.optional %}<div><em>(optional)</em></div>{% endif %}
+      </td>
+      <td>
+        {$ typeList(param.typeList) $}
+      </td>
+      <td>
+        {$ param.description | marked $}
+        {% if param.defaultValue %}<p><em>(default: {$ param.defaultValue $})</em></p>{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro -%}
+
+
+{%- macro directiveParam(name, type, join, sep) %}
+  {%- if type.optional %}[{% endif -%}
+  {$ name | dashCase $}{$ join $}{$ type.name $}{$ sep $}
+  {%- if type.optional %}]{% endif -%}
+{% endmacro -%}
+
+{%- macro functionSyntax(fn, doc) %}
+  {%- set sep = joiner(', ') -%}
+  {% marked -%}
+  `{%- if fn.classmethod %}{$ doc.name $}.{% endif -%}{$ pfx $}{$ fn.name $}({%- for param in fn.params %}{$ sep() $}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name $}
+  {%- if param.type.optional %}]{% endif -%}
+  {% endfor %});`
+  {%- endmarked %}
+{% endmacro -%}
+
+{%- macro propertySyntax(fn, doc) %}
+  {%- set sep = joiner(', ') -%}
+  {% marked -%}
+  `{%- if fn.classmethod %}{$ doc.name $}.{% endif -%}{$ pfx $}{$ fn.name $};`
+  {%- endmarked %}
+{% endmacro -%}
+
+{%- macro propertyInfo(fn) -%}
+  <div class="media">
+    <div class="type-list">
+      {%-  if fn.typeList -%}
+	{$ typeList(fn.typeList) $}
+      {%- else -%}
+	{$ typeList(fn.type.typeList) $}
+      {%- endif -%}
+    </div>
+    <div class="description media-body">
+      {$ fn.description | marked $}
+    </div>
+  </div>
+{%- endmacro -%}
+
+{%- macro returnInfo(fn) -%}
+  <div class="media">
+    <div class="type-list mr-1">
+      {$ typeList(fn.typeList) $}
+    </div>
+    <div class="description media-body">
+      {$ fn.description | marked $}
+    </div>
+  </div>
+{%- endmacro -%}

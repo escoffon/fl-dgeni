@@ -1,0 +1,12 @@
+@ngdoc content
+@name A Guide to the Reward Manager API.
+@module guide
+@isindex
+@id content.guide.main
+@description
+
+## Introduction
+
+Well unfortunately there's no such guide yet.
+
+But here is a `sref` to the {@sref content.guide.model_services Model services} subguide.

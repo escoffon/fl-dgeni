@@ -1,0 +1,113 @@
+{%- macro directiveAttribute(attr, value, join, sep) %}
+  {%- if attr.optional %}[{% endif -%}
+  {$ attr.attrName | dashCase $}{$ join $}
+  {%- if attr.type == '<'  or attr.type == '=' %}expression
+  {%- elif attr.type == '@' %}literal
+  {%- elif attr.type == '&' %}bound expression
+  {%- endif -%}
+  {$ sep $}
+  {%- if attr.optional %}]{% endif -%}
+{% endmacro -%}
+
+{%- macro paramTable(params) %}
+  <table class="table table-condensed variables-matrix input-arguments">
+    <thead>
+      <tr>
+	<th>Param</th>
+	<th>Type</th>
+	<th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for param in params %}
+	<tr>
+	  <td class="name-value">
+            {$ param.name $}
+            {% if param.alias %}| {$ param.alias $}{% endif %}
+            {% if param.optional %}<div><em>(optional)</em></div>{% endif %}
+	  </td>
+	  <td>
+            {$ typeList(param.typeList) $}
+	  </td>
+	  <td>
+            {$ param.description | marked $}
+            {% if param.defaultValue %}<p><em>(default: {$ param.defaultValue $})</em></p>{% endif %}
+	  </td>
+	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endmacro -%}
+
+{%- macro bindingsTable(bindings) %}
+<table class="table variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Type</th>
+      <th></th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for attr in bindings %}
+    <tr>
+      <td class="name-value">
+        {$ attr.attrName | dashCase $}
+      </td>
+      <td>
+        {$ attr.type $}{%- if attr.optional %}?{% endif %}
+      </td>
+      <td class="name-value">
+        {% if attr.optional %}(optional) {% endif %}{$ attr.typeLong $} 
+      </td>
+      <td>
+        {$ attr.description | marked $}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro -%}
+
+{%- macro actorTable(actors) %}
+  <table class="table variables-matrix input-arguments">
+    <thead>
+      <tr>
+	<th>Actor</th>
+	<th>Action</th>
+	<th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for evt in actors %}
+	<tr>
+	  <td class="name-value">{$ evt.actor.name | sref(evt.actor.name) $}</td>
+	  <td>{$ evt | eventAction $}</td>
+	  <td>{$ evt.note | marked $}</td>
+	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endmacro -%}
+
+{%- macro actionTable(actions) %}
+  <table class="table table-condensed variables-matrix input-arguments">
+    <thead>
+      <tr>
+	<th>Event</th>
+	<th>Action</th>
+	<th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for evt in actions %}
+	<tr>
+	  <td class="name-value">{$ evt.name | sref(evt.name, evt.name) $}</td>
+	  <td class="name-value">{$ evt | eventAction $}</td>
+	  <td>{$ evt.note | marked $}</td>
+	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endmacro -%}

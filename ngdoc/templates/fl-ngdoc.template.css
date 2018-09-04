@@ -1,0 +1,148 @@
+/*
+ * Fl CSS for the ngdoc environment.
+ */
+
+.fl-ngdoc-app .navbar {
+    background-color:		LightSlateGray;
+    margin-bottom:		0;
+}
+
+.fl-ngdoc-app .navbar-brand {
+    color:			LightYellow;
+}
+
+.fl-ngdoc-app .navbar-brand:focus, .fl-ngdoc-app .navbar-brand:hover {
+    color:			LightSalmon;
+}
+
+.fl-ngdoc-app .navbar-default .navbar-nav>li>a {
+    color:			LightYellow;
+}
+
+.fl-ngdoc-app .navbar-default .navbar-nav>li>a:hover {
+    color:			LightSalmon;
+}
+
+.fl-ngdoc-app .navbar-default .navbar-nav>li>a:focus {
+    color:			LightGreen;
+}
+
+.fl-ngdoc-app .sidebar {
+    margin-top:			2px;
+    overflow-x:			hidden;
+}
+
+.fl-ngdoc-app .sidebar .glyphicon {
+    font-size:			12px;
+    cursor:			pointer;
+}
+
+.fl-ngdoc-app .sidebar .folder-marker {
+    margin-right:		4px;
+}
+
+.fl-ngdoc-app .sidebar li ol.list-unstyled li {
+    padding-left:		16px;
+}
+
+.fl-ngdoc-app a.type-hint {
+    color:			#337ab7;
+}
+
+.fl-ngdoc-app a.type-hint:hover, .fl-ngdoc-app a.type-hint:focus {
+    background-color:		#337ab7;
+    color:			#ffffff;
+}
+
+.fl-ngdoc-app .sidebar uib-accordion .panel-group {
+    margin-bottom:		2px;
+}
+
+.fl-ngdoc-app .sidebar uib-accordion-group .panel-body {
+    padding-top:		4px;
+    padding-bottom:		2px;
+    padding-left:		10px;
+    padding-right:		4px;
+}
+
+.fl-ngdoc-app .inline h4, .inline div {
+    display:			inline-block;
+}
+
+.fl-ngdoc-app .inline h4 {
+    margin-top:			2px;
+    margin-bottom:		2px;
+}
+
+.fl-ngdoc-app .inline h4 + div {
+    margin-left:		8px;
+}
+
+.fl-ngdoc-app .table td.name-value {
+    min-width:			90px;
+}
+
+.fl-ngdoc-app .properties .media {
+    margin-top:			0;
+}
+
+.fl-ngdoc-app .properties .media-left {
+}
+
+.fl-ngdoc-app .properties .type-list {
+    margin-bottom:		6px;
+    width:			100px;
+    vertical-align:		top;
+}
+
+.fl-ngdoc-app .properties .description {
+    vertical-align:		top;
+}
+
+/*
+ * Overrides.
+ */
+
+code {
+    color:			#08080a;
+    background-color:		#f0f0f2;
+    padding:			0.125rem 0.25rem;
+    border-radius:		0.25rem !important;
+}
+
+.api-profile-header code {
+    background-color:		transparent;
+}
+
+ul.methods, ul.properties {
+    list-style:			none;
+    padding:			0;
+}
+
+ul.methods li h5 code {
+    font-size:			110%;
+}
+
+.table {
+    margin-bottom:		0;
+}
+
+.table td, .table th {
+    padding:			0.25rem;
+}
+
+.table td p, .table th p {
+    margin-bottom:		0.5rem;
+}
+
+.folder-marker.fa, .folder-marker.fas {
+    font-weight:		400;
+}
+
+.sidebar .card-header, .sidebar .card-body {
+    padding:			0.25rem 0.5rem;
+}
+
+.folder-marker {
+    cursor:			pointer;
+}

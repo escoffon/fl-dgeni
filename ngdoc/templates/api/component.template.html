@@ -1,0 +1,51 @@
+{% import "lib/macros.html" as lib -%}
+{% import "lib/fl.html" as fl -%}
+{% extends "api/api.template.html" %}
+
+{% block additional %}
+  <div class="additional-section">
+    <h3>Component Info</h3>
+    <ul>
+      <li>This component executes at priority level {$ doc.priority $}.</li>
+    </ul>
+  </div>
+
+  {% include "lib/bindings.template.html" %}
+  {% include "lib/actions.template.html" %}
+  {% include "lib/methods.template.html" %}
+  {% include "lib/properties.template.html" %}
+
+  {% block usage %}
+  <div class="usage-section">
+    <h3 id="usage">Usage</h3>
+    <div class="usage">
+      {% if doc.usage %}
+      {$ doc.usage | marked $}
+      {% else %}
+	{% if doc.name.indexOf('ng') == 0 -%}
+	  (This component is used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
+	{%- endif %}
+	{% code %}
+	<{$ doc.name | dashCase $}
+        {%- for attr in doc.bindings %}
+          {$ fl.directiveAttribute(attr, null, '="', '"') $}
+        {%- endfor %}>
+	...
+	</{$ doc.name | dashCase $}>
+        {% endcode %}
+      {%- endif %}
+    </div>
+  </div>
+  {% endblock -%}
+
+  {%- if doc.animations %}
+    <div class="animations-section">
+      <h3 id="animations">Animations</h3>
+      {$ doc.animations | marked $}
+      {$ 'module:ngAnimate.$animate' | link('Click here', doc) $} to learn more about the steps involved in the animation.
+    </div>
+  {%- endif -%}
+
+  {% include "lib/params.template.html" %}
+  {% include "lib/events.template.html" %}
+{% endblock %}

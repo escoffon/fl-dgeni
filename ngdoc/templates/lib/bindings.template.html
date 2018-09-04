@@ -1,0 +1,7 @@
+{% import "lib/fl.html" as fl -%}
+{%- if doc.bindings %}
+<section class="bindings-section">
+  <h3>Bindings</h3>
+{$ fl.bindingsTable(doc.bindings) $}
+</section>
+{%- endif -%}

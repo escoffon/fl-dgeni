@@ -1,0 +1,7 @@
+{% import "lib/fl.html" as fl -%}
+{%- if doc.actions and doc.actions.length > 0 %}
+  <section class="bindings-section">
+    <h3>Actions</h3>
+    {$ fl.actionTable(doc.actions) $}
+  </section>
+{%- endif -%}

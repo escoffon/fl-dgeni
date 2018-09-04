@@ -1,0 +1,9 @@
+{% extends "api/object.template.html" %}
+
+{% block related_components %}
+  {% if doc.providerDoc -%}
+  <li>
+    <a ui-sref="{$ doc.providerDoc.state.name $}">{$ doc.providerDoc.name $}</a>
+  </li>
+  {%- endif %}
+{% endblock %}

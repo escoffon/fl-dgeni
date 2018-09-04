@@ -1,0 +1,20 @@
+{% import "lib/macros.html" as lib -%}
+{% extends "api/api.template.html" %}
+
+{% block additional %}
+  <h3>Usage</h3>
+  <h4>In HTML Template Binding</h4>
+  {% if doc.usage %}
+    {$ doc.usage | code $}
+  {% else %}
+    <pre ng-non-bindable>{{ {$ doc.name $}_expression | {$ doc.name $} {%- for param in doc.params %}{% if not loop.first %} : {$ param.name $}{% endif %}{% endfor %} }}</pre>
+  {% endif %}
+
+  <h4>In JavaScript</h4>
+  {%- set sep = joiner(', ') -%}
+  <pre ng-non-bindable>$filter('{$ doc.name $}')({% for param in doc.params %}{$ sep() $}{$ param.name $}{% endfor -%})</pre>
+
+  {% include "lib/params.template.html" %}
+  {% include "lib/this.template.html" %}
+  {% include "lib/returns.template.html" %}
+{% endblock %}

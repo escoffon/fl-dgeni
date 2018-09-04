@@ -1,0 +1,85 @@
+{% import "lib/macros.html" as lib -%}
+{% import "lib/fl.html" as fl -%}
+{% extends "api/api.template.html" %}
+
+{% block additional %}
+  <div class="additional-section">
+    <h3>Directive Info</h3>
+    <ul>
+      {% if doc.controller %}<li>Controller: {@sref {$ doc.controller $}}</li>{% endif %}
+      {% if doc.scope %}<li>This directive creates new scope.</li>{% endif %}
+      <li>This directive executes at priority level {$ doc.priority $}.</li>
+      {% if doc.multiElement %}<li>This directive can be used as {@link $compile#-multielement- multiElement}</li>{% endif %}
+    </ul>
+
+    {% include "lib/bindings.template.html" %}
+    {% include "lib/actions.template.html" %}
+    {% include "lib/methods.template.html" %}
+    {% include "lib/properties.template.html" %}
+
+    {% block usage %}
+      <div class="usage-section">
+	<h3 id="usage">Usage</h3>
+	<div class="usage">
+	  {% if doc.usage %}
+	    {$ doc.usage | marked $}
+	  {% else %}
+	    <ul>
+	      {% if doc.restrict.element %}
+		<li>as element:
+		  {% if doc.name.indexOf('ng') == 0 -%}
+		    (This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
+		  {%- endif %}
+		  {% code %}
+		  <{$ doc.name | dashCase $}
+                  {%- for attr in doc.bindings %}
+		    {$ fl.directiveAttribute(attr, null, '="', '"') $}
+		  {%- endfor %}>
+		  ...
+		  </{$ doc.name | dashCase $}>
+                  {% endcode %}
+		</li>
+	      {% endif -%}
+
+	      {%- if doc.restrict.attribute -%}
+		<li>as attribute:
+		  {% code %}
+		  <{$ doc.element $}
+		    {$ doc.name | dashCase $}
+                  {%- for attr in doc.bindings %}
+		    {$ fl.directiveAttribute(attr, null, '="', '"') $}
+		  {%- endfor %}>
+		  ...
+		  </{$ doc.element $}>
+                  {% endcode %}
+		</li>
+	      {% endif -%}
+
+	      {%- if doc.restrict.cssClass -%}
+		<li>as CSS class:
+		  {% code %}
+		  {% set sep = joiner(' ') %}
+		  <{$ doc.element $} class="
+		  {%- for attr in doc.bindings %}
+		    {$ sep() $}{$ fl.directiveAttribute(attr, null, ': ', ';') $}
+		  {%- endfor %}"> ... </{$ doc.element $}>
+                  {% endcode %}
+		</li>
+	      {% endif -%}
+	    </ul>
+	  {%- endif %}
+	</div>
+      </div>
+  {% endblock -%}
+
+  {%- if doc.animations %}
+    <div class="animations-section">"
+      <h3 id="animations">Animations</h3>
+      {$ doc.animations | marked $}
+      {$ 'module:ngAnimate.$animate' | link('Click here', doc) $} to learn more about the steps involved in the animation.
+    </div>
+  {%- endif -%}
+
+  {% include "lib/params.template.html" %}
+  {% include "lib/events.template.html" %}
+{% endblock %}

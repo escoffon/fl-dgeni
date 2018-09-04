@@ -1,0 +1,68 @@
+{% import "lib/macros.html" as lib %}
+{% extends "api/api.template.html" %}
+
+{% block extends %}
+  {% if doc.extend_docs.length > 0 -%}
+    <section id="extends-section">
+      <h3>Extends</h3>
+      <ul>
+      {% for x in doc.extend_docs -%}
+        <li><a ui-sref="{$ x.state.name $}">{$ x.name $}</a></li>
+      {%- endfor %}
+    </ul>
+    </section>
+  {%- endif %}
+{% endblock %}
+
+{% block mixins %}
+  {% if doc.mixin_docs.length > 0 -%}
+    <section id="mixins-section">
+      <h3>Mixins</h3>
+      <ul>
+      {% for x in doc.mixin_docs -%}
+        <li><a ui-sref="{$ x.state.name $}">{$ x.name $}</a></li>
+      {%- endfor %}
+    </ul>
+    </section>
+  {%- endif %}
+{% endblock %}
+
+{% block subtypes %}
+  {% if doc.subtypes.length > 0 -%}
+    <section id="subtypes-section">
+    <h3>Extended by</h3>
+    <ul>
+      {% for x in doc.subtypes -%}
+        <li><a ui-sref="{$ x.state.name $}">{$ x.name $}</a></li>
+      {%- endfor %}
+    </ul>
+    </section>
+  {%- endif %}
+{% endblock %}
+
+{% block additional %}
+  {% block actions %}
+  {% endblock %}
+  {% if doc.params or doc.returns or doc.this or doc.kind == 'function' -%}
+    <div class="usage-section">
+      <h3 id="usage">Usage</h3>
+      {% if doc.usage %}
+	{$ doc.usage | code $}
+      {% else %}
+	{% if (doc.docType == 'property') %}
+	  {$ lib.propertySyntax(doc) $}
+	{% else %}
+	  {$ lib.functionSyntax(doc) $}
+	{% endif %}
+      {% endif %}
+    </div>
+
+    {% include "lib/params.template.html" %}
+    {% include "lib/this.template.html" %}
+    {% include "lib/returns.template.html" %}
+  {%- endif %}
+
+  {% include "lib/methods.template.html" %}
+  {% include "lib/events.template.html" %}
+  {% include "lib/properties.template.html" %}
+{% endblock %}

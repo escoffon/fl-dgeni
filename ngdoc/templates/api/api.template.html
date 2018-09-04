@@ -1,0 +1,77 @@
+{% extends "base.template.html" %}
+
+{% block content %}
+{% include "lib/debug-dump.template.html" %}
+{% block header %}
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading"><code>{$ doc.name $}</code></h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    <li>
+      {$ doc.docType $} in module {$ doc.moduleDoc.id | sref(doc.moduleDoc.name, doc.moduleDoc) $}
+    </li>
+    {% block related_components %}{% endblock %}
+  </ol>
+</header>
+{% endblock %}
+
+{% block description %}
+  <div class="api-profile-description">
+    {$ doc.description | marked $}
+</div>
+{% endblock %}
+
+{% if doc.knownIssues %}
+<div class="known-issues-section">
+  <h3 id="known-issues">Known Issues</h3>
+  {% for issue in doc.knownIssues -%}
+    <div class="known-issue">
+      {$ issue | marked $}
+    </div>
+  {% endfor -%}
+</div>
+{% endif %}
+
+{% if doc.deprecated %}
+<div class="deprecated-section">
+  <fieldset class="deprecated">
+    <legend>Deprecated API</legend>
+    {$ doc.deprecated| marked $}
+  </fieldset>
+</div>
+{% endif %}
+
+<div class="dependencies-section">
+  {% block dependencies %}
+  {%- if doc.requires %}
+  <h3 id="dependencies">Dependencies</h3>
+  <ul>
+    {% for require in doc.requires %}<li>{$ require | sref $}</li>{% endfor %}
+  </ul>
+  {% endif -%}
+  {% endblock %}
+
+  {% block extends %}
+  {% endblock %}
+
+  {% block mixins %}
+  {% endblock %}
+
+  {% block subtypes %}
+  {% endblock %}
+
+  {% block additional %}
+  {% endblock %}
+
+  {% block examples %}
+  {%- if doc.examples %}
+  <div class="examples-section">
+    <h3 id="example">Example</h3>
+    {%- for example in doc.examples -%}
+      {% code %}{$ example | marked $}{% endcode %}
+    {%- endfor -%}
+  </div>
+  {% endif -%}
+  {% endblock %}
+</div>
+
+{% endblock %}

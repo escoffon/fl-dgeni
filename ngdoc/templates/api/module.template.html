@@ -1,0 +1,66 @@
+{% extends "base.template.html" %}
+
+{% block content %}
+{% include "lib/debug-dump.template.html" %}
+  <h1>
+    {% if doc.title %}{$ doc.title | marked $}{% else %}{$ doc.name | code $}{% endif %}
+  </h1>
+
+  {$ doc.description | marked $}
+
+  {% if doc.knownIssueDocs %}
+    <div class="known-issues-section">
+      <h3 id="known-issues">Known Issues</h3>
+      <table class="table table-compressed definition-table">
+	<tr><th>Name</th><th>Description</th></tr>
+	{% for issueDoc in doc.knownIssueDocs -%}
+	  <tr>
+	    <td>{$ issueDoc.id | link(issueDoc.name, issueDoc) $}</td>
+	    <td>
+	      {% for issue in issueDoc.knownIssues -%}
+		{$ issue | marked $}
+	      {% endfor -%}
+	    </td>
+	  </tr>
+	{% endfor -%}
+      </table>
+    </div>
+  {% endif %}
+
+  <div class="dependencies-section">
+    {% block dependencies %}
+      {%- if doc.requires %}
+	<h3 id="dependencies">Dependencies</h3>
+	<ul>
+	  {% for require in doc.requires %}<li>{$ require | sref $}</li>{% endfor %}
+	</ul>
+      {% endif -%}
+    {% endblock %}
+  </div>
+
+  <div class="component-breakdown-section">
+    <h3>Module Components</h3>
+    {% for componentGroup in doc.componentGroups %}
+      <div>
+	<h4 class="component-heading" id="{$ componentGroup.groupType | dashCase $}">{$ componentGroup.groupType | title $}</h4>
+	<table class="table table-compressed definition-table">
+	  <tr>
+            <th>Name</th>
+            <th>Description</th>
+	  </tr>
+	  {% for component in componentGroup.components %}
+	    <tr>
+              <td>{$ component.id | sref(component.name, component) $}</td>
+              <td>{$ component.description | firstParagraph | marked $}</td>
+	    </tr>
+	  {% endfor %}
+	</table>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if doc.usage %}
+    <h3>Usage</h3>
+    {$ doc.usage | marked $}
+  {% endif %}
+{% endblock %}

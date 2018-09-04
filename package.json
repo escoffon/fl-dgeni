@@ -1,0 +1,23 @@
+{
+   "name": "fl-dgeni",
+   "version": "0.0.1",
+   "description": "Floopstreet Dgeni package",
+   "scripts": {
+   },
+   "author": "Emil Scoffone",
+   "license": "MIT",
+   "engines": {
+      "node": "8.9.1"
+   },
+   "dependencies": {
+      "canonical-path": "0.0.2",
+      "del": "^3.0.0",
+      "dgeni": "^0.4.10",
+      "dgeni-packages": "^0.26.5",
+      "gulp": "^3.9.1",
+      "gulp-run-sequence": "^0.3.2",
+      "run-sequence": "^2.2.1"
+   },
+   "devDependencies": {
+   }
+}

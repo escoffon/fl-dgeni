@@ -1,0 +1,32 @@
+{% import "lib/fl.html" as fl -%}
+{% extends "base.template.html" %}
+
+{% block content %}
+{% include "lib/debug-dump.template.html" %}
+{% block header %}
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading"><code>{$ doc.name $}</code></h1>
+</header>
+{% endblock %}
+
+{% block description %}
+  <div class="api-profile-description">
+    {% if doc.module %}
+      <p>Defined in module {$ doc.module | sref $}</p>
+    {% endif %}
+    {$ doc.description | marked $}
+  </div>
+{% endblock %}
+
+{% include "lib/params.template.html" %}
+
+{% if doc.actors and (doc.actors.length > 0) %}
+  <div class="event-actions-section">
+    <h3>Actors</h3>
+    {$ fl.actorTable(doc.actors) $}
+  </div>
+{%endif %}
+
+{% include "lib/properties.template.html" %}
+
+{% endblock %}
