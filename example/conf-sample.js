@@ -10,7 +10,7 @@ const BRAND = 'Brand';
 const TITLE = 'Title';
 
 module.exports = new Package('cf_ng_docs', [
-    require('./fl-dgeni/ngdoc')
+    require('fl-dgeni/ngdoc')
 ])
 
 // control debug dumps
