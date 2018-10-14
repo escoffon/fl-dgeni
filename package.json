@@ -7,7 +7,6 @@
    "author": "Emil Scoffone",
    "license": "MIT",
    "engines": {
-      "node": "8.9.1"
    },
    "dependencies": {
       "canonical-path": "0.0.2",
