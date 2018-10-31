@@ -32,6 +32,33 @@
 </table>
 {% endmacro -%}
 
+{%- macro propTable(props) %}
+<table class="table table-compressed variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for prop in props %}
+    <tr>
+      <td>
+        {$ prop.name $}
+      </td>
+      <td>
+        {$ typeList(prop.typeList) $}
+      </td>
+      <td>
+        {$ prop.description | marked $}
+        {% if prop.defaultValue %}<p><em>(default: {$ prop.defaultValue $})</em></p>{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro -%}
 
 {%- macro directiveParam(name, type, join, sep) %}
   {%- if type.optional %}[{% endif -%}

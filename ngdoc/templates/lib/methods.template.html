@@ -13,6 +13,11 @@
 	    {$ lib.paramTable(method.params) $}
 	  {% endif %}
 
+	  {% if method.properties %}
+	    <h5>Properties</h5>
+	    {$ lib.propTable(method.properties) $}
+	  {% endif %}
+
 	  {% if method.this %}
 	    <h5>Method's {% code %}this{% endcode %}</h5>
 	    {$ method.this | marked $}
