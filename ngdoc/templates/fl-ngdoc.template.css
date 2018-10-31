@@ -103,14 +103,25 @@
  * Overrides.
  */
 
-code {
+.fl-ngdoc-app pre {
+    background-color:		#f0f0f2;
+    padding:			0.25rem 0.5rem;
+    border-radius:		0.5rem !important;
+}
+
+.fl-ngdoc-app code {
     color:			#08080a;
     background-color:		#f0f0f2;
-    padding:			0.125rem 0.25rem;
+    padding:			0.25rem 0.25rem;
     border-radius:		0.25rem !important;
 }
 
-.api-profile-header code {
+.fl-ngdoc-app pre code {
+    padding:			0.125rem 0.25rem;
+    border-radius:		0 !important;
+}
+
+.fl-ngdoc-app .api-profile-header code {
     background-color:		transparent;
 }
 
