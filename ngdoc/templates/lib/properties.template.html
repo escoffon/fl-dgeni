@@ -3,10 +3,12 @@
 <h3>Properties</h3>
 <ul class="properties">
   {%- for property in doc.properties %}
-  <li id="{$ property.name $}">
-    <h4>{$ property.name | code $}</h4>
-    {$ lib.propertyInfo(property) $}
-  </li>
+    <li id="{$ property.name $}">
+      {% marked -%}
+      <h5>`{%- if property.classproperty %}{$ doc.name $}.{% endif -%}{$ property.name $}`</h5>
+      {%- endmarked %}
+      {$ lib.propertyInfo(property) $}
+    </li>
   {% endfor -%}
 </ul>
 {%- endif -%}

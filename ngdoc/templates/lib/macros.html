@@ -78,9 +78,8 @@
 {% endmacro -%}
 
 {%- macro propertySyntax(fn, doc) %}
-  {%- set sep = joiner(', ') -%}
   {% marked -%}
-  `{%- if fn.classmethod %}{$ doc.name $}.{% endif -%}{$ pfx $}{$ fn.name $};`
+  `{%- if fn.classproperty %}{$ doc.name $}.{% endif -%}{$ pfx $}{$ fn.name $};`
   {%- endmarked %}
 {% endmacro -%}
 

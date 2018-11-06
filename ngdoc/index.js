@@ -26,7 +26,8 @@ module.exports = new Package('fl-dgeni/ngdoc', [
 // - @extends lists the superclass
 // - @mixin lists a mixin object (class extension)
 // - @controller lists the controller used by a component or directive
-// - @classmethod marks a class (as oppsed to instance) method.
+// - @classmethod marks a class (as opposed to instance) method.
+// - @classproperty marks a class (as opposed to instance) property.
 // - @bindings lists directive bindings
 // - @emits registers an emit event
 // - @broadcasts registers an broadcast event
@@ -36,6 +37,7 @@ module.exports = new Package('fl-dgeni/ngdoc', [
 	parseTagsProcessor.tagDefinitions.push(require('./tags/extends'));
 	parseTagsProcessor.tagDefinitions.push(require('./tags/mixin'));
 	parseTagsProcessor.tagDefinitions.push(require('./tags/classmethod'));
+	parseTagsProcessor.tagDefinitions.push(require('./tags/classproperty'));
 	parseTagsProcessor.tagDefinitions.push(require('./tags/controller'));
 	parseTagsProcessor.tagDefinitions.push(require('./tags/bindings'));
 
