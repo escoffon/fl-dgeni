@@ -62,3 +62,7 @@ typings/
 
 # Yarn lockfile
 yarn.lock
+
+# Emacs old version files and buffer backup files
+*~
+#~
